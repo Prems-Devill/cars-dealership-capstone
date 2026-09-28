@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Cars Dealership</title>
+  <link rel="stylesheet" href="../static/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f7fa;
+      color: #222;
+    }
+    nav {
+      background: #1f2937;
+      padding: 14px 24px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-right: 20px;
+      font-weight: 600;
+    }
+    nav a.active {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .intro {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 35px;
+      line-height: 1.6;
+    }
+    .team {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,.08);
+    }
+    .card img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 20px;
+    }
+    .role {
+      color: #2563eb;
+      font-weight: 700;
+      margin: 6px 0 12px;
+    }
+    .card p {
+      line-height: 1.5;
+    }
+    .email {
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about" class="active">About Us</a>
+    <a href="/contact">Contact Us</a>
+  </nav>
+
+  <main class="container">
+    <h1>About Us</h1>
+    <p class="intro">
+      Cars Dealership is a customer-focused national retailer committed to making
+      car shopping simple, transparent, and convenient. Our team combines automotive
+      expertise, technology, and personal service to help customers find the right vehicle.
+    </p>
+
+    <section class="team">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=80" alt="David Carter">
+        <div class="card-content">
+          <h2>David Carter</h2>
+          <div class="role">Chief Executive Officer</div>
+          <p>David leads the dealership group and focuses on customer experience, operational excellence, and responsible growth.</p>
+          <p class="email">Email: david.carter@carsdealership.com</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=900&q=80" alt="Emily Johnson">
+        <div class="card-content">
+          <h2>Emily Johnson</h2>
+          <div class="role">Sales Manager</div>
+          <p>Emily manages the sales team and helps customers compare vehicles, financing options, and dealership services.</p>
+          <p class="email">Email: emily.johnson@carsdealership.com</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80" alt="Michael Lee">
+        <div class="card-content">
+          <h2>Michael Lee</h2>
+          <div class="role">Customer Experience Manager</div>
+          <p>Michael oversees customer support and works with dealership branches to ensure a consistent, helpful buying experience.</p>
+          <p class="email">Email: michael.lee@carsdealership.com</p>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
