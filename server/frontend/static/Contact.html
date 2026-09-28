@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Cars Dealership</title>
+  <link rel="stylesheet" href="../static/style.css">
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f5f7fa; color: #222; }
+    nav { background: #1f2937; padding: 14px 24px; }
+    nav a { color: #fff; text-decoration: none; margin-right: 20px; font-weight: 600; }
+    nav a.active { text-decoration: underline; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+    h1 { text-align: center; margin-bottom: 10px; }
+    .intro { text-align: center; max-width: 760px; margin: 0 auto 30px; line-height: 1.6; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+    .card img { width: 100%; height: 220px; object-fit: cover; }
+    .content { padding: 20px; }
+    .content h2 { margin-top: 0; }
+    .content p { line-height: 1.5; margin: 8px 0; }
+    .label { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about">About Us</a>
+    <a href="/contact" class="active">Contact Us</a>
+  </nav>
+
+  <main class="container">
+    <h1>Contact Us</h1>
+    <p class="intro">
+      Our customer support team is ready to help with vehicle information, dealership
+      visits, service questions, and review-related support.
+    </p>
+
+    <section class="contact-grid">
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80" alt="Cars Dealership headquarters">
+        <div class="content">
+          <h2>Head Office</h2>
+          <p><span class="label">Address:</span> 1200 Market Street, Dallas, TX 75201, USA</p>
+          <p><span class="label">Phone:</span> +1 (800) 555-0147</p>
+          <p><span class="label">Email:</span> support@carsdealership.com</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=900&q=80" alt="Cars dealership showroom">
+        <div class="content">
+          <h2>Sales Team</h2>
+          <p><span class="label">Sales:</span> +1 (800) 555-0188</p>
+          <p><span class="label">Email:</span> sales@carsdealership.com</p>
+          <p><span class="label">Hours:</span> Monday-Friday, 9:00 AM-7:00 PM</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=900&q=80" alt="Automotive service center">
+        <div class="content">
+          <h2>Service & Support</h2>
+          <p><span class="label">Service:</span> +1 (800) 555-0199</p>
+          <p><span class="label">Email:</span> service@carsdealership.com</p>
+          <p><span class="label">Hours:</span> Monday-Saturday, 8:00 AM-6:00 PM</p>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
