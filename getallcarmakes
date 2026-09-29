@@ -1,0 +1,24 @@
+$ curl -X GET http://127.0.0.1:8000/djangoapp/get_cars/
+
+[
+  {
+    "make": "Acura",
+    "models": ["ILX", "MDX", "RDX", "TLX"]
+  },
+  {
+    "make": "BMW",
+    "models": ["3 Series", "5 Series", "X3", "X5"]
+  },
+  {
+    "make": "Ford",
+    "models": ["Bronco", "Escape", "Explorer", "F-150", "Mustang"]
+  },
+  {
+    "make": "Honda",
+    "models": ["Accord", "Civic", "CR-V", "Pilot"]
+  },
+  {
+    "make": "Toyota",
+    "models": ["Camry", "Corolla", "RAV4", "Highlander"]
+  }
+]
