@@ -1,0 +1,12 @@
+$ curl -X GET http://127.0.0.1:8000/djangoapp/get_dealer/1/
+
+{
+  "id": 1,
+  "full_name": "Example Motors",
+  "address": "123 Main Street",
+  "city": "Dallas",
+  "state": "TX",
+  "zip": "75201",
+  "lat": 32.7767,
+  "long": -96.7970
+}
