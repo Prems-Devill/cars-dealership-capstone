@@ -1,0 +1,5 @@
+Include the app routes in the Django project's URL configuration with:
+
+path("djangoapp/", include("djangoapp.urls")),
+
+The resulting login endpoint is POST /djangoapp/login/.
