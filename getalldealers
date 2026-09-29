@@ -1,0 +1,24 @@
+$ curl -X GET http://127.0.0.1:8000/djangoapp/get_dealers/
+
+[
+  {
+    "id": 1,
+    "full_name": "Example Motors",
+    "address": "123 Main Street",
+    "city": "Dallas",
+    "state": "TX",
+    "zip": "75201",
+    "lat": 32.7767,
+    "long": -96.7970
+  },
+  {
+    "id": 2,
+    "full_name": "Kansas Auto Center",
+    "address": "456 Market Street",
+    "city": "Wichita",
+    "state": "KS",
+    "zip": "67202",
+    "lat": 37.6872,
+    "long": -97.3301
+  }
+]
