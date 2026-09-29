@@ -1,0 +1,14 @@
+$ curl -X GET http://127.0.0.1:8000/djangoapp/get_dealers/Kansas/
+
+[
+  {
+    "id": 2,
+    "full_name": "Kansas Auto Center",
+    "address": "456 Market Street",
+    "city": "Wichita",
+    "state": "KS",
+    "zip": "67202",
+    "lat": 37.6872,
+    "long": -97.3301
+  }
+]
