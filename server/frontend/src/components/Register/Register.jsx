@@ -24,27 +24,27 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username</label>
-          <input id="username" name="username" type="text" value={formData.username} onChange={handleChange} required />
+          <input id="username" name="username" type="text" placeholder="Username" value={formData.username} onChange={handleChange} required />
         </div>
 
         <div>
           <label htmlFor="firstName">First Name</label>
-          <input id="firstName" name="firstName" type="text" value={formData.firstName} onChange={handleChange} required />
+          <input id="firstName" name="firstName" type="text" placeholder="First Name" value={formData.firstName} onChange={handleChange} required />
         </div>
 
         <div>
           <label htmlFor="lastName">Last Name</label>
-          <input id="lastName" name="lastName" type="text" value={formData.lastName} onChange={handleChange} required />
+          <input id="lastName" name="lastName" type="text" placeholder="Last Name" value={formData.lastName} onChange={handleChange} required />
         </div>
 
         <div>
           <label htmlFor="email">Email</label>
-          <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required />
+          <input id="email" name="email" type="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
         </div>
 
         <div>
           <label htmlFor="password">Password</label>
-          <input id="password" name="password" type="password" value={formData.password} onChange={handleChange} required />
+          <input id="password" name="password" type="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
         </div>
 
         <button type="submit">Register</button>
