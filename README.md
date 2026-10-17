@@ -39,6 +39,16 @@ Dealership data API:
 - `GET /fetchCarModels` — distinct car make/model pairs
 - `POST /insert_review` — persist a review
 
+## Admin screenshot preparation
+
+After the web container is running, create the required Django admin user interactively (the password is entered locally and is not stored in Git):
+
+```bash
+docker compose exec web python manage.py createsuperuser --username root --email root@example.com
+```
+
+Then open `/admin/`, sign in as `root`, and capture the login screenshot. For the logout screenshot, use the admin site's **Log out** action and capture the resulting page. Do not use a fabricated screenshot.
+
 ## Configuration
 
 For non-Docker runs, set these environment variables if services are not on localhost:
