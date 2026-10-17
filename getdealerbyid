@@ -1,12 +1,14 @@
-$ curl -X GET http://127.0.0.1:8000/djangoapp/get_dealer/1/
+$ curl -X GET http://127.0.0.1:3030/fetchDealer/1
 
 {
   "id": 1,
-  "full_name": "Example Motors",
-  "address": "123 Main Street",
-  "city": "Dallas",
-  "state": "TX",
-  "zip": "75201",
-  "lat": 32.7767,
-  "long": -96.7970
+  "city": "El Paso",
+  "state": "Texas",
+  "st": "TX",
+  "address": "3 Nova Court",
+  "zip": "88563",
+  "lat": 31.6948,
+  "long": -106.3,
+  "short_name": "Holdlamis",
+  "full_name": "Holdlamis Car Dealership"
 }
