@@ -91,4 +91,4 @@ jobs:
           curl -fsS "http://127.0.0.1:8000/analyze/Fantastic%20services" | python -c 'import json,sys; d=json.load(sys.stdin); assert d.get("sentiment") == "positive"; print("PASS: sentiment analysis returns positive")'
       - name: Shut down services
         if: always()
-        run: docker compose down -v
+        run: timeout 30s docker compose down -v || true
