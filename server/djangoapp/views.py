@@ -76,7 +76,7 @@ def registration(request):
     return JsonResponse({"userName": user.username, "status": "Registered"}, status=201)
 
 
-def fetch_dealers(request):
+def fetch_dealers(request, state=None):
     if request.method != "GET":
         return JsonResponse({"error": "GET method required"}, status=405)
     try:
