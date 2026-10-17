@@ -28,6 +28,71 @@ def _proxy_error(exc):
     )
 
 
+
+def home(request):
+    state = request.GET.get("state", "").strip()
+    try:
+        endpoint = f"fetchDealers/{state}" if state else "fetchDealers"
+        dealers = restapis.get_request(endpoint)
+    except (requests.RequestException, ValueError):
+        logger.exception("Unable to load dealers for homepage")
+        dealers = []
+    username = request.user.username if request.user.is_authenticated else ""
+    return render(request, "Home.html", {
+        "dealers": dealers,
+        "state_filter": state,
+        "username": username,
+    })
+
+
+def dealer_page(request, dealer_id):
+    try:
+        dealer = restapis.get_request(f"fetchDealer/{dealer_id}")
+        reviews = restapis.get_request(f"fetchReviews/dealer/{dealer_id}")
+    except requests.HTTPError:
+        return render(request, "Dealer.html", {
+            "dealer": None, "reviews": [], "error": "Dealer not found"
+        }, status=404)
+    except (requests.RequestException, ValueError):
+        logger.exception("Unable to load dealer details")
+        return render(request, "Dealer.html", {
+            "dealer": None, "reviews": [], "error": "Dealer service is unavailable"
+        }, status=502)
+    for review in reviews:
+        try:
+            review["sentiment"] = restapis.analyze_review_sentiments(
+                review.get("review", "")
+            ).get("sentiment", "neutral")
+        except (requests.RequestException, ValueError):
+            review["sentiment"] = "neutral"
+    username = request.user.username if request.user.is_authenticated else ""
+    return render(request, "Dealer.html", {
+        "dealer": dealer,
+        "reviews": reviews,
+        "username": username,
+    })
+
+
+def post_review_page(request, dealer_id):
+    try:
+        dealer = restapis.get_request(f"fetchDealer/{dealer_id}")
+    except (requests.RequestException, ValueError):
+        return render(request, "PostReview.html", {
+            "dealer": None, "username": "", "error": "Dealer service is unavailable"
+        }, status=502)
+    if not request.user.is_authenticated:
+        return render(request, "PostReview.html", {
+            "dealer": dealer,
+            "username": "",
+            "error": "Please log in before posting a review.",
+        }, status=401)
+    return render(request, "PostReview.html", {
+        "dealer": dealer,
+        "username": request.user.username,
+        "error": "",
+    })
+
+
 @csrf_exempt
 def login_user(request):
     if request.method != "POST":
