@@ -25,7 +25,7 @@ const normalize = (value) => String(value ?? "").trim().toLowerCase();
 app.get("/", (_req, res) => res.send("Cars Dealership data API is running."));
 app.get("/fetchDealers", (_req, res) => {
   try { return res.json(readData(dealershipsFile, "dealerships")); }
-  catch (error) { return res.status(500).json({ error: "Unable to read dealerships" }); }
+  catch { return res.status(500).json({ error: "Unable to read dealerships" }); }
 });
 app.get("/fetchDealers/:state", (req, res) => {
   try {
@@ -34,7 +34,7 @@ app.get("/fetchDealers/:state", (req, res) => {
       normalize(d.state) === state || normalize(d.st) === state
     );
     return res.json(matches);
-  } catch (error) { return res.status(500).json({ error: "Unable to filter dealerships" }); }
+  } catch { return res.status(500).json({ error: "Unable to filter dealerships" }); }
 });
 app.get("/fetchDealer/:id", (req, res) => {
   const id = Number(req.params.id);
@@ -44,7 +44,7 @@ app.get("/fetchDealer/:id", (req, res) => {
 });
 app.get("/fetchReviews", (_req, res) => {
   try { return res.json(readData(reviewsFile, "reviews")); }
-  catch (error) { return res.status(500).json({ error: "Unable to read reviews" }); }
+  catch { return res.status(500).json({ error: "Unable to read reviews" }); }
 });
 app.get("/fetchReviews/dealer/:id", (req, res) => {
   const id = Number(req.params.id);
@@ -53,7 +53,7 @@ app.get("/fetchReviews/dealer/:id", (req, res) => {
 });
 app.get("/fetchCars", (_req, res) => {
   try { return res.json(readData(carsFile, "cars")); }
-  catch (error) { return res.status(500).json({ error: "Unable to read car inventory" }); }
+  catch { return res.status(500).json({ error: "Unable to read car inventory" }); }
 });
 app.get("/fetchCarModels", (_req, res) => {
   try {
@@ -67,7 +67,7 @@ app.get("/fetchCarModels", (_req, res) => {
       return items;
     }, []);
     return res.json({ CarModels });
-  } catch (error) { return res.status(500).json({ error: "Unable to read car models" }); }
+  } catch { return res.status(500).json({ error: "Unable to read car models" }); }
 });
 app.post("/insert_review", (req, res) => {
   const body = req.body || {};
@@ -91,7 +91,7 @@ app.post("/insert_review", (req, res) => {
     reviews.push(review);
     writeData(reviewsFile, "reviews", reviews);
     return res.status(201).json(review);
-  } catch (error) { return res.status(500).json({ error: "Unable to save review" }); }
+  } catch { return res.status(500).json({ error: "Unable to save review" }); }
 });
 
 app.listen(port, "0.0.0.0", () => console.log("Cars Dealership data API listening on port " + port));
