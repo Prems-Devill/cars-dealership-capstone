@@ -1,0 +1,66 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cars Dealership</title>
+  <link rel="stylesheet" href="/static/bootstrap.min.css"><link rel="stylesheet" href="/static/style.css">
+  <style>
+    body{font-family:Arial,sans-serif;background:#f5f7fa;color:#1f2937;margin:0}
+    header{background:#111827;color:white;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+    header a{color:white;margin-right:14px;text-decoration:none}
+    main{max-width:1200px;margin:28px auto;padding:0 18px}
+    .panel{background:white;border-radius:12px;padding:22px;margin-bottom:22px;box-shadow:0 3px 12px #00000012}
+    table{width:100%;border-collapse:collapse;background:white}th,td{padding:10px;border:1px solid #d1d5db;text-align:left}th{background:#e5e7eb}
+    .filters,.login-form{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    input,button,select{padding:9px;border:1px solid #cbd5e1;border-radius:6px}button,.button{background:#1d4ed8;color:white;border:0;padding:10px 14px;border-radius:6px;cursor:pointer;text-decoration:none}
+    .muted{color:#64748b}.status{margin:8px 0}
+  </style>
+</head>
+<body>
+<header>
+  <div><strong>Cars Dealership</strong> &nbsp; <a href="/">Home</a><a href="/about">About Us</a><a href="/contact">Contact Us</a></div>
+  <div id="account-area">
+  {% if username %}
+    <span>Logged in as: <strong>{{ username }}</strong></span>
+    <button type="button" onclick="logoutUser()">Logout</button>
+  {% else %}
+    <form class="login-form" id="login-form">
+      <input name="userName" placeholder="Username" autocomplete="username" required>
+      <input name="password" type="password" placeholder="Password" autocomplete="current-password" required>
+      <button type="submit">Login</button>
+    </form>
+  {% endif %}
+  </div>
+</header>
+<main>
+  <section class="panel">
+    <h1>Welcome to Cars Dealership</h1>
+    <p>Browse dealership locations, view customer reviews, and compare dealer information.</p>
+    <form class="filters" method="get" action="/">
+      <label for="state">Filter by state</label>
+      <input id="state" name="state" placeholder="e.g. Kansas or KS" value="{{ state_filter }}">
+      <button type="submit">Filter</button><a class="button" href="/">Show all dealers</a>
+    </form>
+  </section>
+  <section class="panel">
+    <h2>Our Dealers</h2>
+    {% if dealers %}
+    <div style="overflow-x:auto"><table>
+      <thead><tr><th>ID</th><th>Dealer name</th><th>Address</th><th>City</th><th>State</th><th>ZIP</th><th>Latitude</th><th>Longitude</th><th>Reviews</th></tr></thead>
+      <tbody>{% for dealer in dealers %}<tr>
+        <td>{{ dealer.id }}</td><td>{{ dealer.full_name }}</td><td>{{ dealer.address }}</td><td>{{ dealer.city }}</td><td>{{ dealer.state }} ({{ dealer.st }})</td><td>{{ dealer.zip }}</td><td>{{ dealer.lat }}</td><td>{{ dealer.long }}</td>
+        <td><a class="button" href="/dealer/{{ dealer.id }}/">Review Dealer</a></td>
+      </tr>{% endfor %}</tbody>
+    </table></div>
+    {% else %}<p class="muted">No dealers could be loaded. Check that the data API is running.</p>{% endif %}
+  </section>
+  <p id="message" class="status" role="status"></p>
+</main>
+<script>
+const message=document.getElementById("message");
+const loginForm=document.getElementById("login-form");
+if(loginForm){loginForm.addEventListener("submit",async(event)=>{event.preventDefault();const form=new FormData(loginForm);try{const response=await fetch("/djangoapp/login",{method:"POST",headers:{"Content-Type":"application/json"},credentials:"include",body:JSON.stringify({userName:form.get("userName"),password:form.get("password")})});const data=await response.json();if(!response.ok||data.status!=="Authenticated")throw new Error("Login failed. Check your username and password.");location.reload();}catch(error){message.textContent=error.message||"Login failed.";}});}
+async function logoutUser(){const response=await fetch("/djangoapp/logout",{method:"GET",credentials:"include"});if(response.ok)location.reload();else message.textContent="Logout failed.";}
+</script>
+</body></html>
