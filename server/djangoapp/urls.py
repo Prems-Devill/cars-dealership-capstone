@@ -1,11 +1,11 @@
-from django.urls import path
+from django.urls import path\nfrom django.views.generic import RedirectView
 
 from . import views
 
 app_name = "djangoapp"
 
 urlpatterns = [
-    path("", views.home, name="home"),
+    path("", views.home, name="home"),\n    path("about", RedirectView.as_view(url="/static/About.html", permanent=False), name="about"),\n    path("contact", RedirectView.as_view(url="/static/Contact.html", permanent=False), name="contact"),
     path("dealer/<int:dealer_id>/", views.dealer_page, name="dealer_page"),
     path("dealer/<int:dealer_id>/review/", views.post_review_page, name="post_review_page"),
     path("login", views.login_user, name="login"),
