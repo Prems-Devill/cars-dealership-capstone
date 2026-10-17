@@ -1,0 +1,6 @@
+$ curl -X POST http://127.0.0.1:8000/djangoapp/login -H "Content-Type: application/json" -d "{\"userName\":\"$LOGIN_USER\",\"password\":\"$LOGIN_PASSWORD\"}" -c cookies.txt
+
+Expected successful response format:
+{"userName":"<authenticated-username>","status":"Authenticated"}
+
+Set LOGIN_USER and LOGIN_PASSWORD to a valid account before running. Replace the expected response with the actual response from your server before submitting.
