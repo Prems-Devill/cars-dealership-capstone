@@ -80,7 +80,7 @@ def fetch_dealers(request, state=None):
     if request.method != "GET":
         return JsonResponse({"error": "GET method required"}, status=405)
     try:
-        state = request.GET.get("state")
+        state = state or request.GET.get("state")
         endpoint = f"fetchDealers/{state}" if state else "fetchDealers"
         return JsonResponse(restapis.get_request(endpoint), safe=False)
     except (requests.RequestException, ValueError) as exc:
