@@ -188,9 +188,12 @@ def get_cars(request):
 def add_review(request):
     if request.method != "POST":
         return JsonResponse({"error": "POST method required"}, status=405)
+    if not request.user.is_authenticated:
+        return JsonResponse({"error": "Authentication required"}, status=401)
     data = _json_body(request)
     if data is None:
         return JsonResponse({"error": "Invalid JSON"}, status=400)
+    data["name"] = request.user.username
     required = ("name", "dealership", "review", "purchase", "purchase_date",
                 "car_make", "car_model", "car_year")
     missing = [field for field in required if data.get(field) in (None, "")]
