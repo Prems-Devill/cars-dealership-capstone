@@ -97,7 +97,7 @@ export default function Review({ dealerId, userName, onSubmitted }) {
 
         {sentiment && (
           <p className="sentiment-result">
-            <img src={`/static/sentiment_${sentiment}.svg`} alt={`${sentiment} sentiment`} width="32" height="32" />
+            <img src={`/static/sentiment_${sentiment}.svg`} alt={`${sentiment} sentiment`} width="32" height="32" style={{ width: 32, height: 32, objectFit: "contain" }} />
             Sentiment: {sentiment}
           </p>
         )}
