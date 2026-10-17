@@ -57,3 +57,38 @@ jobs:
         run: npm run lint
       - name: Check JavaScript syntax
         run: node --check app.js
+
+  integration-smoke:
+    name: Integration Smoke Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Build and start services
+        run: docker compose up --build -d
+      - name: Wait for services
+        run: |
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:3030/fetchDealers >/dev/null \
+              && curl -fsS http://127.0.0.1:5050/analyze/Fantastic%20services >/dev/null \
+              && curl -fsS http://127.0.0.1:8000/fetchDealers >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          docker compose logs
+          exit 1
+      - name: Verify all dealers and required fields
+        run: |
+          curl -fsS http://127.0.0.1:3030/fetchDealers | python -c 'import json,sys; rows=json.load(sys.stdin); assert len(rows) == 50, f"Expected 50 dealers, got {len(rows)}"; assert all("short_name" in row for row in rows); print(f"PASS: {len(rows)} dealers and short_name fields")'
+      - name: Verify dealer detail and review endpoints
+        run: |
+          curl -fsS http://127.0.0.1:3030/fetchDealer/1 | python -c 'import json,sys; d=json.load(sys.stdin); assert d["id"] == 1 and d.get("short_name"); print("PASS: dealer-by-ID includes short_name")'
+          curl -fsS http://127.0.0.1:3030/fetchReviews/dealer/15 | python -c 'import json,sys; rows=json.load(sys.stdin); assert rows and all(k in rows[0] for k in ("purchase_date","car_make","car_model","car_year")); print(f"PASS: {len(rows)} dealer reviews include purchase/car fields")'
+      - name: Verify Django car models and sentiment
+        run: |
+          curl -fsS http://127.0.0.1:8000/djangoapp/get_cars/ | python -c 'import json,sys; d=json.load(sys.stdin); rows=d.get("CarModels", []); assert len(rows) >= 15 and all("CarMake" in x and "CarModel" in x for x in rows); print(f"PASS: {len(rows)} car make/model pairs")'
+          curl -fsS "http://127.0.0.1:8000/analyze/Fantastic%20services" | python -c 'import json,sys; d=json.load(sys.stdin); assert d.get("sentiment") == "positive"; print("PASS: sentiment analysis returns positive")'
+      - name: Shut down services
+        if: always()
+        run: docker compose down -v
