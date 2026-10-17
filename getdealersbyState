@@ -1,14 +1,16 @@
-$ curl -X GET http://127.0.0.1:8000/djangoapp/get_dealers/Kansas/
+$ curl -X GET http://127.0.0.1:3030/fetchDealers/Kansas
 
 [
   {
-    "id": 2,
-    "full_name": "Kansas Auto Center",
-    "address": "456 Market Street",
-    "city": "Wichita",
-    "state": "KS",
-    "zip": "67202",
-    "lat": 37.6872,
-    "long": -97.3301
+    "id": 8,
+    "city": "Topeka",
+    "state": "Kansas",
+    "st": "KS",
+    "address": "288 Larry Place",
+    "zip": "66642",
+    "lat": 39.0429,
+    "long": -95.7697,
+    "short_name": "Bytecard",
+    "full_name": "Bytecard Car Dealership"
   }
 ]
